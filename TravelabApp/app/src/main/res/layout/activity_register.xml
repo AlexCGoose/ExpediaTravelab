@@ -43,6 +43,13 @@
             android:text="@string/already_registered_sign_in_here"
             android:textAlignment="center" />
 
+        <Button
+            android:id="@+id/buttonMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="Message" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

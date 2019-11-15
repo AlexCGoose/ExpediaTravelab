@@ -6,5 +6,10 @@
     <string name="already_registered_sign_in_here">Already registered? Sign in here</string>
     <string name="register">Register</string>
     <string name="don_t_have_an_account_register_here">Don\'t have an account? Register here</string>
+    <string name="logout">Logout</string>
+    <string name="save_information">Save Information</string>
+    <string name="enter_address">Enter Address</string>
+    <string name="enter_your_full_name">Enter your full name</string>
+    <string name="textviewu">TextViewU</string>
     <string name="input_placeholder">Write a message</string>
 </resources>

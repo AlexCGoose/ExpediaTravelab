@@ -2,6 +2,7 @@ package com.example.travelabapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -9,13 +10,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
     //Initialise email + password variables and login button
-    private Button buttonLogIn;
+    private Button buttonSignIn;
     private EditText editTextEmail, editTextPassword;
+    private TextView textViewSignUp;
+    private ProgressDialog progressDialog;
 
 
     @Override
@@ -24,12 +28,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         //Relates variables to Design View
-        editTextEmail = findViewById(R.id.editTextEmail);
-        editTextPassword = findViewById(R.id.editTextPassword);
-        buttonLogIn =  findViewById(R.id.buttonLogIn);
+        editTextEmail = (EditText) findViewById(R.id.editTextEmail);
+        editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        buttonSignIn = (Button) findViewById(R.id.buttonSignIn);
+        textViewSignUp = (TextView) findViewById(R.id.textViewSignup);
+        progressDialog = new ProgressDialog(this);
 
         //Listener will be used to change activities
-        buttonLogIn.setOnClickListener(this);
+        buttonSignIn.setOnClickListener(this);
+        textViewSignUp.setOnClickListener(this);
     }
 
     private void userLogIn() {
@@ -51,6 +58,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Log.w("Login Activity", "User provided an invalid password");
             return;
         }
+        //If validations are ok
+        //Show a progress bar
+        progressDialog.setMessage("Signing in...");
+        progressDialog.show();
+
         //TODO: Login auth
 
         //Code here
@@ -63,8 +75,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        if(view == buttonLogIn) {
+        if(view == buttonSignIn) {
             userLogIn();
+        }
+        if(view == textViewSignUp) {
+            finish();
+            startActivity(new Intent(this, MainActivity.class));
         }
     }
 }

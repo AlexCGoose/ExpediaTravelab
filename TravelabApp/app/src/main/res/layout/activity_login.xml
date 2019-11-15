@@ -14,27 +14,34 @@
         android:orientation="vertical">
 
         <EditText
+            android:layout_margin="15dp"
+            android:inputType="textEmailAddress"
+            android:hint="@string/enter_your_email"
             android:id="@+id/editTextEmail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:hint="@string/enter_your_email"
-            android:inputType="textEmailAddress" />
+            android:layout_height="wrap_content"/>
 
         <EditText
-            android:id="@+id/editTextPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:hint="@string/enter_your_password"
-            android:inputType="textPassword" />
+            android:id="@+id/editTextPassword"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <Button
-            android:id="@+id/buttonLogIn"
+            android:layout_margin="15dp"
+            android:id="@+id/buttonSignIn"
+            android:text="@string/sign_in"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/textViewSignup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="@string/sign_in" />
+            android:text="@string/don_t_have_an_account_register_here"
+            android:textAlignment="center" />
 
     </LinearLayout>
 

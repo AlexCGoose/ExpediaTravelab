@@ -6,4 +6,5 @@
     <string name="already_registered_sign_in_here">Already registered? Sign in here</string>
     <string name="register">Register</string>
     <string name="don_t_have_an_account_register_here">Don\'t have an account? Register here</string>
+    <string name="input_placeholder">Write a message</string>
 </resources>

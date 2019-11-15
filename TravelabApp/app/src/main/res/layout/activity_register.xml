@@ -52,4 +52,12 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/buttonTravelActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Travel activity"
+        tools:layout_editor_absoluteX="87dp"
+        tools:layout_editor_absoluteY="350dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

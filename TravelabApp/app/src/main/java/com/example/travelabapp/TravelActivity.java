@@ -1,4 +1,10 @@
 package com.example.travelabapp;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import android.os.Bundle;
 import android.view.View;
@@ -34,7 +40,8 @@ public class TravelActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View view) {
         if(view == buttonSearch) {
             //TODO - Must change params to right format e.g. london_gb and 16/11/2019
-            String apiUrl = "https://api.skypicker.com/flights?fly_from="+editTextFlightFrom+"&fly_to="+editTextFlightTo+"&date_from="+editTextDepartDate+"&date_to="+editTextReturnDate+"&partner=picky&vehicle_type=aircraft";
+//            String apiUrl = "https://api.skypicker.com/flights?fly_from="+editTextFlightFrom+"&fly_to="+editTextFlightTo+"&date_from="+editTextDepartDate+"&date_to="+editTextReturnDate+"&partner=picky&vehicle_type=aircraft";
+            String apiUrl = "https://api.skypicker.com/flights?fly_from=london_gb&fly_to=cardiff_gb&date_from=16/11/2019&date_to=17/11/2019&partner=picky&vehicle_type=aircraft";
             RequestQueue queue = Volley.newRequestQueue(this);
 
             StringRequest stringRequest = new StringRequest(Request.Method.GET, apiUrl,

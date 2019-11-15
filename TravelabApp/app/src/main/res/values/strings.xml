@@ -11,4 +11,5 @@
     <string name="enter_address">Enter Address</string>
     <string name="enter_your_full_name">Enter your full name</string>
     <string name="textviewu">TextViewU</string>
+    <string name="input_placeholder">Write a message</string>
 </resources>

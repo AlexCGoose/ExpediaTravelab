@@ -62,12 +62,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
         if(view == buttonRegister) {
+            //TODO get rid
+            startActivity(new Intent(this, TravelActivity.class));
             registerUser();
         }
 
         if(view == textViewSignin) {
             //will open login activity here
-            startActivity(new Intent(this, LoginActivity.class));
+            startActivity(new Intent(this, TravelActivity.class));
         }
     }
 }

@@ -36,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             //User is currently logged in
             //Profile activity here
             finish();
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
         }
 
         progressDialog = new ProgressDialog(this);
@@ -77,7 +77,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
                             finish();
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         }else{
 
                             Toast.makeText(RegisterActivity.this, "Could not register... Please try again", Toast.LENGTH_SHORT).show();

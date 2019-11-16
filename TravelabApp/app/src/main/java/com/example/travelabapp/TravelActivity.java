@@ -1,8 +1,10 @@
 package com.example.travelabapp;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -14,7 +16,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class TravelActivity extends AppCompatActivity implements View.OnClickListener{
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class TravelActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText editTextFlightFrom, editTextFlightTo, editTextDepartDate, editTextReturnDate;
     private Button buttonSearch;
@@ -39,29 +45,30 @@ public class TravelActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View view) {
-        if(view == buttonSearch) {
+        if (view == buttonSearch) {
             //TODO - Must change params to right format e.g. london_gb and 16/11/2019
 //            String apiUrl = "https://api.skypicker.com/flights?fly_from="+editTextFlightFrom+"&fly_to="+editTextFlightTo+"&date_from="+editTextDepartDate+"&date_to="+editTextReturnDate+"&partner=picky&vehicle_type=aircraft";
-            String apiUrl = "https://api.skypicker.com/flights?fly_from=london_gb&fly_to=cardiff_gb&date_from=16/11/2019&date_to=17/11/2019&partner=picky&vehicle_type=aircraft";
+            String apiUrl = "https://api.skypicker.com/flights?flyFrom=PRG&to=LGW&dateFrom=17/11/2019&dateTo=18/11/2019&partner=picky";
             RequestQueue queue = Volley.newRequestQueue(this);
 
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, apiUrl,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            // Display the first 500 characters of the response string.
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                    (Request.Method.GET, apiUrl, null, new Response.Listener<JSONObject>() {
 
-                            textView.setText("Response is: "+ response.substring(0,500));
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            textView.setText("Response: " + response.toString().substring(0, 500));
                         }
                     }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    textView.setText("That didn't work!");
-                }
-            });
 
-// Add the request to the RequestQueue.
-            queue.add(stringRequest);
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            // TODO: Handle error
+                            textView.setText("That didn't work!" + error);
+                        }
+                    });
+
+// Access the RequestQueue through your singleton class.
+            queue.add(jsonObjectRequest);
 
         }
 

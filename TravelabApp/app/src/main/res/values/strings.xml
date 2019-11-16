@@ -26,5 +26,10 @@
         <item>Johnson Family Holiday</item>
         <item>family holiday: pending invites!</item>
     </string-array>
-
+    <string name="logout">Logout</string>
+    <string name="save_information">Save Information</string>
+    <string name="enter_address">Enter Address</string>
+    <string name="enter_your_full_name">Enter your full name</string>
+    <string name="textviewu">TextViewU</string>
+    <string name="input_placeholder">Write a message</string>
 </resources>

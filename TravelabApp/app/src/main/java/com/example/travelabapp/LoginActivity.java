@@ -1,5 +1,6 @@
 package com.example.travelabapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -13,6 +14,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
     //Initialise email + password variables and login button
@@ -20,12 +26,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText editTextEmail, editTextPassword;
     private TextView textViewSignUp;
     private ProgressDialog progressDialog;
+    private FirebaseAuth firebaseAuth;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        firebaseAuth = FirebaseAuth.getInstance();
 
         //Relates variables to Design View
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
@@ -63,14 +71,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressDialog.setMessage("Signing in...");
         progressDialog.show();
 
-        //TODO: Login auth
+        firebaseAuth.signInWithEmailAndPassword(email,password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        progressDialog.dismiss();
 
-        //Code here
-
-        //TODO: After logging in, redirect to a home page of sorts
-        //Start home page activity
-        Intent myIntent = new Intent(this, MainActivity.class);
-        this.startActivity(myIntent);
+                        if(task.isSuccessful()) {
+                            //Start the profile activity
+                            finish();
+                            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                        }
+                    }
+                });
     }
 
     @Override

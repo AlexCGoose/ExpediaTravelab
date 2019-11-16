@@ -61,7 +61,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        databaseReference.child(user.getUid()).setValue(userInformation);
+        databaseReference.child("Users").child(user.getUid()).setValue(userInformation);
 
         Toast.makeText(this, "Information saved...", Toast.LENGTH_LONG).show();
     }

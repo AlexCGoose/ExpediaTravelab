@@ -22,7 +22,7 @@ import java.util.Random;
 public class MessageActivity extends AppCompatActivity implements RoomListener {
 
     private String channelID = "sN5zKoam9n2TCYGr";
-    private String roomName = "observable-room";
+
     private EditText editText;
     private Scaledrone scaledrone;
     private MessageAdapter messageAdapter;
@@ -30,6 +30,7 @@ public class MessageActivity extends AppCompatActivity implements RoomListener {
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
+    private String roomName = "observable-room";
 
     private String getRandomColor() {
         Random r = new Random();

@@ -22,6 +22,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private Button buttonRegister;
     private Button buttonMessage;
+
     private EditText editTextEmail, editTextPassword;
     private TextView textViewSignin;
     private ProgressDialog progressDialog;
@@ -42,13 +43,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         progressDialog = new ProgressDialog(this);
 
+
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
         buttonMessage = (Button) findViewById(R.id.buttonMessage);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         textViewSignin = (TextView) findViewById(R.id.textViewSignin);
 
+
         buttonRegister.setOnClickListener(this);
+
         buttonMessage.setOnClickListener(this);
         textViewSignin.setOnClickListener(this);
     }
@@ -84,8 +88,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         }else{
 
                             Toast.makeText(RegisterActivity.this, "Could not register... Please try again", Toast.LENGTH_SHORT).show();
-
-
                         }
                     }
                 });

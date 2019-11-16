@@ -24,6 +24,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private DatabaseReference databaseReference;
     private EditText editTextName, editTextAddress;
     private Button buttonSave;
+    private Button buttonTravelActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         editTextAddress = (EditText) findViewById(R.id.editTextAddress);
         editTextName = (EditText) findViewById(R.id.editTextName);
         buttonSave = (Button) findViewById(R.id.buttonSave);
+        buttonTravelActivity = (Button) findViewById(R.id.buttonTravelActivity);
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
@@ -52,6 +54,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         buttonLogout.setOnClickListener(this);
         buttonSave.setOnClickListener(this);
+        buttonTravelActivity.setOnClickListener(this);
     }
 
     private void saveUserInformation() {
@@ -69,6 +72,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View view) {
+        //TODO - delete this if
+        if(view == buttonTravelActivity) {
+            finish();
+            startActivity(new Intent(this, TravelActivity.class));
+        }
+
         if(view == buttonLogout) {
             firebaseAuth.signOut();
             finish();

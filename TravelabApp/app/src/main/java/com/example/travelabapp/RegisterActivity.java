@@ -37,11 +37,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             //User is currently logged in
             //Profile activity here
             finish();
-            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
 
         progressDialog = new ProgressDialog(this);
-
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         textViewSignin = (TextView) findViewById(R.id.textViewSignin);

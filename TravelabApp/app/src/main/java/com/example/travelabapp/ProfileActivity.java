@@ -42,7 +42,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         editTextAddress = (EditText) findViewById(R.id.editTextAddress);
         editTextName = (EditText) findViewById(R.id.editTextName);
         buttonSave = (Button) findViewById(R.id.buttonSave);
-
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         textViewUserEmail = (TextView) findViewById(R.id.textViewUserEmail);
@@ -77,6 +76,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         if(view == buttonSave) {
             saveUserInformation();
+            finish();
+            startActivity(new Intent(this, MainActivity.class));
         }
     }
 }

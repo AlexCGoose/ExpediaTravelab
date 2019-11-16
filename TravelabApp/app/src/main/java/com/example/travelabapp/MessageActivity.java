@@ -2,14 +2,19 @@ package com.example.travelabapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.scaledrone.lib.*;
 
 import java.util.Random;
@@ -17,11 +22,15 @@ import java.util.Random;
 public class MessageActivity extends AppCompatActivity implements RoomListener {
 
     private String channelID = "sN5zKoam9n2TCYGr";
-    private String roomName = "observable-room";
+
     private EditText editText;
     private Scaledrone scaledrone;
     private MessageAdapter messageAdapter;
     private ListView messagesView;
+
+    private FirebaseAuth firebaseAuth;
+    private DatabaseReference databaseReference;
+    private String roomName = "observable-room";
 
     private String getRandomColor() {
         Random r = new Random();
@@ -35,10 +44,24 @@ public class MessageActivity extends AppCompatActivity implements RoomListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MessageMemberData data = new MessageMemberData("Adam", getRandomColor());
+        setContentView(R.layout.activity_message);
+
+        firebaseAuth = firebaseAuth.getInstance();
+
+        if (firebaseAuth.getCurrentUser() == null) {
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        String name = user.getDisplayName();
+
+        MessageMemberData data = new MessageMemberData(name, getRandomColor());
 
         messageAdapter = new MessageAdapter(this);
-        messagesView = (ListView) findViewById(R.id.messages_view);
+        messagesView = (ListView) findViewById(R.id.messagesView);
+
         messagesView.setAdapter(messageAdapter);
 
         scaledrone = new Scaledrone(channelID, data);
@@ -65,7 +88,7 @@ public class MessageActivity extends AppCompatActivity implements RoomListener {
                 System.err.println(reason);
             }
         });
-        setContentView(R.layout.activity_main);
+
         // This is where we write the mesage
         editText = (EditText) findViewById(R.id.editText);
     }

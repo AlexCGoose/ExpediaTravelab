@@ -30,13 +30,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //code block for determing user login status
         firebaseAuth = firebaseAuth.getInstance();
-        if (firebaseAuth.getCurrentUser() == null) {
-            finish();
-            startActivity(new Intent(this, LoginActivity.class));
-        }
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
         createGroup = (Button) findViewById(R.id.btn1);
@@ -45,6 +41,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         createGroup.setOnClickListener(this);
         settings.setOnClickListener(this);
 
+        //code block for determing user login status
+        if (firebaseAuth.getCurrentUser() == null) {
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+        else
+        {
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+            DatabaseReference ref2 = ref.child("Users").child(user.getUid()).child("Group");
+
+            ref2.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    String name = dataSnapshot.getValue(String.class);
+
+                    if(name != null)
+                    {
+                        //do what you want with the email
+                        Log.e("LOG", "test");
+                        createGroup.setText(name);
+                    }else
+                    {
+                        Log.e("LOG", "missing");
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+
 
         //TODO create newGroup buttons accessors user's existing groups
 
@@ -52,11 +82,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+        final FirebaseUser user = firebaseAuth.getCurrentUser();
         //startActivity(new Intent(this, MainActivity.class));
         if(view == createGroup) {
             if(createGroup.getText().toString().equals("New Group"))
             {
-                final FirebaseUser user = firebaseAuth.getCurrentUser();
+
                 LinearLayout layout = (LinearLayout) findViewById(R.id.groupsLayout);
                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
                 DatabaseReference ref2 = ref.child("Users").child(user.getUid()).child("name");

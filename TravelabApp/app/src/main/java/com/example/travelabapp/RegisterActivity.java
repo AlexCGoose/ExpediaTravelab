@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button buttonRegister;
+    private Button buttonMessage;
     private EditText editTextEmail, editTextPassword;
     private TextView textViewSignin;
     private ProgressDialog progressDialog;
@@ -36,17 +37,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             //User is currently logged in
             //Profile activity here
             finish();
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
         }
 
         progressDialog = new ProgressDialog(this);
 
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
+        buttonMessage = (Button) findViewById(R.id.buttonMessage);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         textViewSignin = (TextView) findViewById(R.id.textViewSignin);
 
         buttonRegister.setOnClickListener(this);
+        buttonMessage.setOnClickListener(this);
         textViewSignin.setOnClickListener(this);
     }
 
@@ -77,7 +80,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
                             finish();
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         }else{
 
                             Toast.makeText(RegisterActivity.this, "Could not register... Please try again", Toast.LENGTH_SHORT).show();
@@ -94,6 +97,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
         if(view == buttonRegister) {
             registerUser();
+        }
+
+        if(view == buttonMessage) {
+            //TODO -- DELETE THIS
+            startActivity(new Intent(this, MessageActivity.class));
         }
 
         if(view == textViewSignin) {

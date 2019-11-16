@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     Button newbtn;
+    int count = 1;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -29,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         public void addButton(){
             LinearLayout layout = (LinearLayout) findViewById(R.id.rootLayout);
             newbtn = new Button(this);
-            newbtn.setText("Group Name");
+            newbtn.setText("New Group Created");
             layout.addView(newbtn);
         }
 }

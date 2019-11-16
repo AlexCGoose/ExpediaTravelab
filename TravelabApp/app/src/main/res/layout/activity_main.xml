@@ -11,11 +11,16 @@
         android:layout_height="match_parent"
         android:id="@+id/rootLayout"
         android:orientation="vertical">
+
         <Button
+            android:id="@+id/btn1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btn1"
-            android:text="New Group"/>
+            android:text="New Group"
+            tools:layout_conversion_absoluteHeight="48dp"
+            tools:layout_editor_absoluteY="0dp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_conversion_absoluteWidth="104dp" />
     </LinearLayout>
 
 

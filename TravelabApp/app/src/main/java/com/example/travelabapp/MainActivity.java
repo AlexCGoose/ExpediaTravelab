@@ -4,12 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -17,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button createGroup;
     ImageButton settings;
     private FirebaseAuth firebaseAuth;
+    private DatabaseReference databaseReference;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             finish();
             startActivity(new Intent(this, LoginActivity.class));
         }
-        FirebaseUser user = firebaseAuth.getCurrentUser();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
 
         createGroup = (Button) findViewById(R.id.btn1);
         settings =  (ImageButton) findViewById(R.id.btnSettings);
@@ -36,21 +43,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         createGroup.setOnClickListener(this);
         settings.setOnClickListener(this);
 
+
         //TODO create newGroup buttons accessors user's existing groups
 
     }
 
     @Override
     public void onClick(View view) {
-        startActivity(new Intent(this, MainActivity.class));
+        //startActivity(new Intent(this, MainActivity.class));
         if(view == createGroup) {
-            FirebaseUser user = firebaseAuth.getCurrentUser();
-            LinearLayout layout = (LinearLayout) findViewById(R.id.groupsLayout);
-            newGroup = new Button(this);
-            newGroup.setText(user.getDisplayName() + "'s Holiday Group");
-            layout.addView(newGroup);
-            //TODO declare new group to user's dataset
+            if(createGroup.getText().toString().equals("New Group"))
+            {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                LinearLayout layout = (LinearLayout) findViewById(R.id.groupsLayout);
 
+                //TODO -- FIX
+                String name = "Adam";
+
+
+                createGroup.setText(name + "'s Holiday Group");
+
+                //TODO declare new group to user's dataset
+
+                //Here we can use editTextGroup to set the name of the group
+                //String groupName = editTextGroup.getText().toString().trim();
+
+                String groupName = name + "Group";
+
+                //Set group name to his display name
+                //Group is named after the person who creates it, and he is set as first member.
+                //GroupInformation groupInformation = new GroupInformation(user.getDisplayName(), user.getDisplayName());
+                databaseReference.child("Users").child(user.getUid()).child("Group").setValue(groupName);
+                databaseReference.child("Groups").child(groupName).child("Members").child("1").setValue(name);
+                databaseReference.child("Groups").child(groupName).child("MemCount").setValue("1");
+            }
+            else
+            {
+                Log.e("TAG", createGroup.getText().toString());
+                finish();
+                startActivity(new Intent(this, GroupActivity.class));
+            }
         }
 
         if(view == settings) {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -19,32 +20,39 @@
         android:inputType="textPersonName"
         android:text="Flight to" />
 
-    <EditText
-        android:id="@+id/editTextDepartDate"
+    <TextView
+        android:id="@+id/departDate1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Depart date"
-        android:inputType="date" />
+        android:text="Depart Date" />
 
-    <EditText
-        android:id="@+id/editTextReturnDate"
+    <Button
+        android:id="@+id/departDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Return date"
-        android:inputType="date" />
+        android:text="Depart Date"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+
+    <TextView
+        android:id="@+id/returnDate1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Return Date" />
+
+    <Button
+        android:id="@+id/returnDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Return Date"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />/>
+
 
     <Button
         android:id="@+id/buttonSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Search" />
-
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
 
 </LinearLayout>

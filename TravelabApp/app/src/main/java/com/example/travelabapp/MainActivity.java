@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageButton settings;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
+    public String tempName;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         //String groupName = editTextGroup.getText().toString().trim();
 
                         String groupName = name + "Group";
+                        tempName = groupName;
 
                         //Set group name to his display name
                         //Group is named after the person who creates it, and he is set as first member.
@@ -124,7 +126,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             {
                 Log.e("TAG", createGroup.getText().toString());
                 finish();
-                startActivity(new Intent(this, GroupActivity.class));
+                Intent intent = new Intent(getBaseContext(), GroupActivity.class);
+                intent.putExtra("Group name", tempName);
+                startActivity(intent);
             }
         }
 

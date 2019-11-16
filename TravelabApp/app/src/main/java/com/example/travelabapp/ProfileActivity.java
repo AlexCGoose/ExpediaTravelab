@@ -44,7 +44,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         editTextName = (EditText) findViewById(R.id.editTextName);
         buttonSave = (Button) findViewById(R.id.buttonSave);
         buttonTravelActivity = (Button) findViewById(R.id.buttonTravelActivity);
-
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         textViewUserEmail = (TextView) findViewById(R.id.textViewUserEmail);
@@ -65,7 +64,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        databaseReference.child(user.getUid()).setValue(userInformation);
+        databaseReference.child("Users").child(user.getUid()).setValue(userInformation);
 
         Toast.makeText(this, "Information saved...", Toast.LENGTH_LONG).show();
     }
@@ -86,6 +85,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         if(view == buttonSave) {
             saveUserInformation();
+            finish();
+            startActivity(new Intent(this, MainActivity.class));
         }
     }
 }

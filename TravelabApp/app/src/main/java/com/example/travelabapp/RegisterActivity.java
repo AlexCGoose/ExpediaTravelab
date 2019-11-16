@@ -38,7 +38,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             //User is currently logged in
             //Profile activity here
             finish();
-            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
 
         progressDialog = new ProgressDialog(this);
@@ -49,8 +49,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         textViewSignin = (TextView) findViewById(R.id.textViewSignin);
-
-
         buttonRegister.setOnClickListener(this);
 
         buttonMessage.setOnClickListener(this);
@@ -99,11 +97,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
         if(view == buttonRegister) {
             registerUser();
-        }
-
-        if(view == buttonMessage) {
-            //TODO -- DELETE THIS
-            startActivity(new Intent(this, MessageActivity.class));
         }
 
         if(view == textViewSignin) {

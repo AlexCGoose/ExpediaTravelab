@@ -2,6 +2,7 @@ package com.example.travelabapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +11,10 @@ import android.widget.ListView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.scaledrone.lib.*;
 
 import java.util.Random;
@@ -22,6 +27,9 @@ public class MessageActivity extends AppCompatActivity implements RoomListener {
     private Scaledrone scaledrone;
     private MessageAdapter messageAdapter;
     private ListView messagesView;
+
+    private FirebaseAuth firebaseAuth;
+    private DatabaseReference databaseReference;
 
     private String getRandomColor() {
         Random r = new Random();
@@ -37,14 +45,21 @@ public class MessageActivity extends AppCompatActivity implements RoomListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
 
+        firebaseAuth = firebaseAuth.getInstance();
 
-        MessageMemberData data = new MessageMemberData("Adam", getRandomColor());
+        if (firebaseAuth.getCurrentUser() == null) {
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        String name = user.getDisplayName();
+
+        MessageMemberData data = new MessageMemberData(name, getRandomColor());
 
         messageAdapter = new MessageAdapter(this);
         messagesView = (ListView) findViewById(R.id.messagesView);
-        if (messagesView == null) {
-            Log.e("OHGOD", "Why is this null?");
-        }
 
         messagesView.setAdapter(messageAdapter);
 

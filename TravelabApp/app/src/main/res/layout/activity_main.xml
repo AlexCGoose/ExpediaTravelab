@@ -7,10 +7,21 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/groupsLayout"
+        android:layout_width="411dp"
+        android:layout_height="550dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rootLayout"></LinearLayout>
+
+    <LinearLayout
         android:id="@+id/rootLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <Button
             android:id="@+id/btn1"
             android:layout_width="wrap_content"
@@ -28,7 +39,6 @@
             android:layout_gravity="left"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/gear" />
-
 
 
     </LinearLayout>

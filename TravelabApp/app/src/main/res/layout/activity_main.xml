@@ -10,17 +10,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/rootLayout"
-        android:orientation="vertical">
-
+        android:orientation="horizontal">
         <Button
             android:id="@+id/btn1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Group"
             tools:layout_conversion_absoluteHeight="48dp"
-            tools:layout_editor_absoluteY="0dp"
+            tools:layout_conversion_absoluteWidth="104dp"
             tools:layout_editor_absoluteX="0dp"
-            tools:layout_conversion_absoluteWidth="104dp" />
+            tools:layout_editor_absoluteY="0dp" />
+
+        <ImageButton
+            android:id="@+id/btnSettings"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="left"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/gear" />
+
+
+
     </LinearLayout>
 
 

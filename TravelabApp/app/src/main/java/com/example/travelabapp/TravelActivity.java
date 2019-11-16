@@ -9,6 +9,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +20,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class TravelActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -56,7 +60,27 @@ public class TravelActivity extends AppCompatActivity implements View.OnClickLis
 
                         @Override
                         public void onResponse(JSONObject response) {
-                            textView.setText("Response: " + response.toString().substring(0, 500));
+                            ArrayList<String> flightNumbers = new ArrayList<>();
+                            ArrayList<String> prices = new ArrayList<>();
+                            try {
+                                JSONArray data = response.getJSONArray("data");
+                                textView.setText("Response: " + data.toString());
+//                                JSONObject dataFirst = data.getJSONObject(0);
+
+//                                textView.setText("Response: " + data2.toString());
+
+                                for (int i = 0; i < data.length(); i++) {
+                                    JSONObject userDetail = data.getJSONObject(i);
+                                    flightNumbers.add(userDetail.getString("flight_no"));
+                                    prices.add(userDetail.getString("price"));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+//                            textView.setText("Response: " + response.toString().substring(0, 500));
+//                            textView.setText("Response: " + flightNumbers.size());
+
+
                         }
                     }, new Response.ErrorListener() {
 
@@ -69,6 +93,8 @@ public class TravelActivity extends AppCompatActivity implements View.OnClickLis
 
 // Access the RequestQueue through your singleton class.
             queue.add(jsonObjectRequest);
+
+
 
         }
 

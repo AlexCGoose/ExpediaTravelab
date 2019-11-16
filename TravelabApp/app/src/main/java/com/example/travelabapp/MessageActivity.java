@@ -3,13 +3,12 @@ package com.example.travelabapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.scaledrone.lib.*;
 
@@ -36,10 +35,17 @@ public class MessageActivity extends AppCompatActivity implements RoomListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_message);
+
+
         MessageMemberData data = new MessageMemberData("Adam", getRandomColor());
 
         messageAdapter = new MessageAdapter(this);
-        messagesView = (ListView) findViewById(R.id.messages_view);
+        messagesView = (ListView) findViewById(R.id.messagesView);
+        if (messagesView == null) {
+            Log.e("OHGOD", "Why is this null?");
+        }
+
         messagesView.setAdapter(messageAdapter);
 
         scaledrone = new Scaledrone(channelID, data);
@@ -66,7 +72,7 @@ public class MessageActivity extends AppCompatActivity implements RoomListener {
                 System.err.println(reason);
             }
         });
-        setContentView(R.layout.activity_main);
+
         // This is where we write the mesage
         editText = (EditText) findViewById(R.id.editText);
     }

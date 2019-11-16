@@ -68,7 +68,7 @@ public class MessageActivity extends AppCompatActivity implements RoomListener {
         scaledrone.connect(new Listener() {
             @Override
             public void onOpen() {
-                System.out.println("Scaledrone connection open");
+                Log.e("COOL", "Connect success");
                 // Since the MainActivity itself already implement RoomListener we can pass it as a target
                 scaledrone.subscribe(roomName, MessageActivity.this);
             }

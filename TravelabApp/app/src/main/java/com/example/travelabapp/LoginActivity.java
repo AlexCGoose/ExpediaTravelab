@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextView textViewSignUp;
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
+    private Button buttonTravel;
 
 
     @Override
@@ -39,6 +40,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         buttonSignIn = (Button) findViewById(R.id.buttonSignIn);
+        buttonTravel = (Button) findViewById(R.id.buttonTravel);
         textViewSignUp = (TextView) findViewById(R.id.textViewSignup);
         progressDialog = new ProgressDialog(this);
 
@@ -95,5 +97,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             finish();
             startActivity(new Intent(this, RegisterActivity.class));
         }
+        if(view == buttonTravel) {
+            startActivity(new Intent(this, TravelActivity.class));
+        }
+
     }
 }

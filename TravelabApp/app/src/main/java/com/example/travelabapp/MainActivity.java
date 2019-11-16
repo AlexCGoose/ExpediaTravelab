@@ -1,21 +1,23 @@
 package com.example.travelabapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
-import java.util.ArrayList;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -54,28 +56,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(view == createGroup) {
             if(createGroup.getText().toString().equals("New Group"))
             {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
+                final FirebaseUser user = firebaseAuth.getCurrentUser();
                 LinearLayout layout = (LinearLayout) findViewById(R.id.groupsLayout);
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                DatabaseReference ref2 = ref.child("Users").child(user.getUid()).child("name");
 
-                //TODO -- FIX
-                String name = "Adam";
+                ref2.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        String name = dataSnapshot.getValue(String.class);
+                        //do what you want with the email
+                        createGroup.setText(name + "'s Holiday Group");
 
+                        //TODO declare new group to user's dataset
 
-                createGroup.setText(name + "'s Holiday Group");
+                        //Here we can use editTextGroup to set the name of the group
+                        //String groupName = editTextGroup.getText().toString().trim();
 
-                //TODO declare new group to user's dataset
+                        String groupName = name + "Group";
 
-                //Here we can use editTextGroup to set the name of the group
-                //String groupName = editTextGroup.getText().toString().trim();
+                        //Set group name to his display name
+                        //Group is named after the person who creates it, and he is set as first member.
+                        //GroupInformation groupInformation = new GroupInformation(user.getDisplayName(), user.getDisplayName());
+                        databaseReference.child("Users").child(user.getUid()).child("Group").setValue(groupName);
+                        databaseReference.child("Groups").child(groupName).child("Members").child("1").setValue(name);
+                        databaseReference.child("Groups").child(groupName).child("MemCount").setValue("1");
+                    }
 
-                String groupName = name + "Group";
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
-                //Set group name to his display name
-                //Group is named after the person who creates it, and he is set as first member.
-                //GroupInformation groupInformation = new GroupInformation(user.getDisplayName(), user.getDisplayName());
-                databaseReference.child("Users").child(user.getUid()).child("Group").setValue(groupName);
-                databaseReference.child("Groups").child(groupName).child("Members").child("1").setValue(name);
-                databaseReference.child("Groups").child(groupName).child("MemCount").setValue("1");
+                    }
+                });
             }
             else
             {

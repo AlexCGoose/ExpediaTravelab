@@ -22,7 +22,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private Button buttonRegister;
     private Button buttonMessage;
-    private Button buttonTravelActivity;
+
     private EditText editTextEmail, editTextPassword;
     private TextView textViewSignin;
     private ProgressDialog progressDialog;
@@ -43,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         progressDialog = new ProgressDialog(this);
 
-        buttonTravelActivity = (Button) findViewById(R.id.buttonTravelActivity);
+
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
         buttonMessage = (Button) findViewById(R.id.buttonMessage);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
@@ -52,7 +52,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
         buttonRegister.setOnClickListener(this);
-        buttonTravelActivity.setOnClickListener(this);
+
         buttonMessage.setOnClickListener(this);
         textViewSignin.setOnClickListener(this);
     }
@@ -99,11 +99,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
         if(view == buttonRegister) {
             registerUser();
-        }
-
-        //TODO - delete this if
-        if(view == buttonTravelActivity) {
-            startActivity(new Intent(this, TravelActivity.class));
         }
 
         if(view == buttonMessage) {

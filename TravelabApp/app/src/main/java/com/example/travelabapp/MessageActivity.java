@@ -13,8 +13,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.scaledrone.lib.*;
 
 import java.util.Random;
@@ -53,9 +56,7 @@ public class MessageActivity extends AppCompatActivity implements RoomListener {
             startActivity(new Intent(this, LoginActivity.class));
         }
 
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        String name = user.getDisplayName();
+        String name = "Adam";
 
         MessageMemberData data = new MessageMemberData(name, getRandomColor());
 

@@ -18,7 +18,7 @@ public class TravelActivity extends AppCompatActivity implements View.OnClickLis
 
     private EditText editTextFlightFrom, editTextFlightTo, editTextDepartDate, editTextReturnDate;
     private Button buttonSearch;
-    final TextView textView = (TextView) findViewById(R.id.text);
+    private TextView textView;
 
 
     @Override
@@ -31,6 +31,7 @@ public class TravelActivity extends AppCompatActivity implements View.OnClickLis
         editTextDepartDate = (EditText) findViewById(R.id.editTextDepartDate);
         editTextReturnDate = (EditText) findViewById(R.id.editTextReturnDate);
         buttonSearch = (Button) findViewById(R.id.buttonSearch);
+        textView = (TextView) findViewById(R.id.text);
 
         buttonSearch.setOnClickListener(this);
 

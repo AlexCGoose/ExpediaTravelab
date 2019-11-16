@@ -4,21 +4,31 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Flight from" />
+
     <EditText
         android:id="@+id/editTextFlightFrom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Flight from" />
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Flight to" />
 
     <EditText
         android:id="@+id/editTextFlightTo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Flight to" />
+        android:inputType="textPersonName" />
 
     <TextView
         android:id="@+id/departDate1"

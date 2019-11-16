@@ -28,13 +28,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             finish();
             startActivity(new Intent(this, LoginActivity.class));
         }
-
+        FirebaseUser user = firebaseAuth.getCurrentUser();
 
         createGroup = (Button) findViewById(R.id.btn1);
         settings =  (ImageButton) findViewById(R.id.btnSettings);
 
         createGroup.setOnClickListener(this);
         settings.setOnClickListener(this);
+
+        //TODO create newGroup buttons accessors user's existing groups
 
     }
 
@@ -43,11 +45,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(new Intent(this, MainActivity.class));
         if(view == createGroup) {
             FirebaseUser user = firebaseAuth.getCurrentUser();
-            LinearLayout layout = (LinearLayout) findViewById(R.id.rootLayout);
+            LinearLayout layout = (LinearLayout) findViewById(R.id.groupsLayout);
             newGroup = new Button(this);
             newGroup.setText(user.getDisplayName() + "'s Holiday Group");
             layout.addView(newGroup);
-            //Add new group to user's dataset
+            //TODO declare new group to user's dataset
+
         }
 
         if(view == settings) {
